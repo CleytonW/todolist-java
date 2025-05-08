@@ -24,7 +24,7 @@ A estrutura do projeto segue o padrão MVC (Model-View-Controller):
 - **Java**: Linguagem de programação principal.
 - **Spring Boot**: Framework para simplificar o desenvolvimento de aplicações Java.
 - **Maven**: Gerenciador de dependências e automação de build.
-- **H2 Database**: Banco de dados em memória para testes e desenvolvimento.
+- **MySQL**: Banco de dados relacional utilizado para persistência de dados.
 
 ## Pré-requisitos
 
@@ -68,16 +68,32 @@ Abaixo estão os principais endpoints disponíveis na aplicação:
 - `PUT /todos/{id}`: Atualiza uma tarefa existente.
 - `DELETE /todos/{id}`: Exclui uma tarefa.
 
-## Testes
+## Descrição das Entidades
 
-Para executar os testes, utilize o seguinte comando:
-```bash
-./mvnw test
-```
-No Windows:
-```bash
-mvnw.cmd test
-```
+### Todo
+A entidade `Todo` representa uma tarefa na aplicação. Ela possui os seguintes atributos:
+
+- **id**: Identificador único da tarefa.
+- **nome**: Nome da tarefa.
+- **descricao**: Descrição detalhada da tarefa.
+- **realizado**: Indica se a tarefa foi concluída (true/false).
+- **prioridade**: Nível de prioridade da tarefa (inteiro).
+
+## Configuração do Banco de Dados
+
+1. Certifique-se de que o MySQL está instalado e em execução.
+2. Crie um banco de dados para a aplicação:
+   ```sql
+   CREATE DATABASE todolist;
+   ```
+3. Configure o arquivo `application.properties` com as credenciais do banco de dados:
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/todolist
+   spring.datasource.username=seu_usuario
+   spring.datasource.password=sua_senha
+   spring.jpa.hibernate.ddl-auto=update
+   spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+   ```
 
 ## Contribuição
 
